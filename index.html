@@ -2,24 +2,154 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>법률사무소 사율 | 실연동 테스트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>법률사무소 사율 | 법률을 넘어, 사람을 봅니다.</title>
+
+<meta name="description" content="법률사무소 사율. 정확한 판단과 사람을 이해하는 시선으로 법률 문제를 해결합니다.">
+
 <style>
-:root{--black:#0b0d0f;--navy:#101820;--gold:#b99a61;--cream:#f5f2eb}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;color:#222;background:#fff}
-a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
-header{position:sticky;top:0;z-index:10;background:#0b0d0fee;color:#fff;border-bottom:1px solid #333}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font:22px Georgia;letter-spacing:5px;color:#fff}
-nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-flex;padding:12px 18px;background:var(--gold);color:#fff;border:0;cursor:pointer}
+:root{
+  --black:#080a0c;
+  --navy:#101820;
+  --navy2:#14212c;
+  --gold:#b99a61;
+  --gold-light:#d1b27a;
+  --cream:#f5f2eb;
+  --white:#ffffff;
+  --text:#222;
+  --muted:#8f9aa4;
+  --line:#343c43;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  color:var(--text);
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+textarea{
+  font-family:inherit;
+}
+
+.wrap{
+  width:min(1180px,calc(100% - 40px));
+  margin:0 auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,10,12,.96);
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+}
+
+.nav{
+  height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:24px;
+  letter-spacing:7px;
+  color:#fff;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  font-size:14px;
+}
+
+nav a{
+  color:#d8d8d8;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:#fff;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  padding:14px 22px;
+  background:var(--gold);
+  color:#fff;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:var(--gold-light);
+  transform:translateY(-2px);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
 .hero{
   position:relative;
-  min-height:680px;
+  min-height:700px;
   display:flex;
   align-items:center;
   overflow:hidden;
   background:
-    radial-gradient(circle at 75% 35%,rgba(185,150,82,.10),transparent 30%),
-    linear-gradient(110deg,#07090b 0%,#0c1116 55%,#14212c 100%);
+    radial-gradient(
+      circle at 76% 30%,
+      rgba(185,154,97,.13),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 95% 80%,
+      rgba(30,60,80,.25),
+      transparent 35%
+    ),
+    linear-gradient(
+      110deg,
+      #050708 0%,
+      #0a0f14 45%,
+      #101b24 72%,
+      #142430 100%
+    );
   color:#fff;
 }
 
@@ -28,34 +158,58 @@ nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-fl
   position:absolute;
   inset:0;
   background:
-    linear-gradient(90deg,rgba(0,0,0,.18),transparent 65%),
-    linear-gradient(180deg,transparent 70%,rgba(0,0,0,.35));
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.35),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 65%,
+      rgba(0,0,0,.4)
+    );
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:600px;
+  height:600px;
+  right:-220px;
+  top:50%;
+  transform:translateY(-50%);
+  border:1px solid rgba(185,154,97,.12);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 80px rgba(185,154,97,.025),
+    0 0 0 160px rgba(185,154,97,.015);
   pointer-events:none;
 }
 
 .hero-inner{
   position:relative;
-  z-index:1;
+  z-index:2;
 }
 
 .hero-copy{
   max-width:850px;
-  padding:90px 0;
+  padding:110px 0 100px;
 }
 
 .hero .label{
   color:var(--gold);
   font-size:12px;
   letter-spacing:4px;
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
 
 .hero h1{
   margin:0;
-  font-size:clamp(52px,7vw,92px);
-  line-height:1.12;
+  font-size:clamp(54px,7vw,94px);
+  line-height:1.08;
   font-weight:300;
-  letter-spacing:-4px;
+  letter-spacing:-5px;
 }
 
 .hero h1 strong{
@@ -65,43 +219,38 @@ nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-fl
 }
 
 .hero-desc{
-  margin:38px 0 0;
-  color:#aeb7bf;
+  margin:42px 0 0;
+  color:#aeb8c0;
   font-size:18px;
   line-height:1.9;
-  letter-spacing:-.3px;
+  letter-spacing:-.4px;
 }
 
 .hero-actions{
   display:flex;
   align-items:center;
   gap:30px;
-  margin-top:42px;
+  margin-top:44px;
 }
 
 .hero-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:150px;
+  min-width:160px;
   padding:17px 28px;
-  background:var(--gold);
-  color:#fff;
   font-size:14px;
   font-weight:600;
-  transition:.25s;
-}
-
-.hero-btn:hover{
-  transform:translateY(-2px);
-  opacity:.9;
 }
 
 .hero-link{
   color:#ddd;
   font-size:14px;
-  border-bottom:1px solid #777;
-  padding-bottom:5px;
+  border-bottom:1px solid #6c7378;
+  padding-bottom:6px;
+  transition:.2s;
+}
+
+.hero-link:hover{
+  color:#fff;
+  border-color:#fff;
 }
 
 .hero-link span{
@@ -113,69 +262,354 @@ nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-fl
   display:flex;
   align-items:center;
   gap:10px;
-  margin-top:70px;
-  color:#68727b;
+  margin-top:72px;
+  color:#68737c;
   font-size:11px;
   letter-spacing:2px;
 }
 
 .hero-note span{
   display:block;
-  width:28px;
+  width:30px;
   height:1px;
   background:var(--gold);
 }
-section{padding:90px 0}.label{color:var(--gold);letter-spacing:3px;font-size:11px;margin-bottom:14px}.title{font-size:42px;margin:0 0 35px}
-.case{background:var(--cream)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;padding:26px;min-height:190px}.card .cat{color:var(--gold);font-size:11px}.card h3{font-size:18px;line-height:1.6}.card p{color:#777;line-height:1.8;font-size:13px}
-.consult{background:#101820;color:#fff}.form{max-width:650px;display:grid;gap:12px}.form input,.form textarea{width:100%;padding:14px;border:1px solid #555;background:#151d23;color:#fff}.form textarea{min-height:140px}
-.status{padding:12px 15px;background:#f3f3f3;margin-bottom:20px;font-size:13px}.ok{border-left:4px solid #20a36a}.warn{border-left:4px solid #d59b30}.err{border-left:4px solid #c94b4b}
-footer{background:#080909;color:#888;padding:50px 0}
+
+
+/* =========================
+   COMMON SECTION
+========================= */
+
+section{
+  padding:100px 0;
+}
+
+.label{
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:11px;
+  margin-bottom:16px;
+}
+
+.title{
+  margin:0 0 38px;
+  font-size:44px;
+  line-height:1.2;
+  letter-spacing:-2px;
+}
+
+
+/* =========================
+   CASE
+========================= */
+
+.case{
+  background:var(--cream);
+}
+
+.case .title{
+  color:#202020;
+}
+
+.case-status{
+  margin-bottom:24px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:30px;
+  min-height:220px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.card .cat{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  margin:0 0 18px;
+  font-size:20px;
+  line-height:1.5;
+  letter-spacing:-.7px;
+}
+
+.card p{
+  margin:0 0 12px;
+  color:#777;
+  line-height:1.8;
+  font-size:13px;
+}
+
+.card p strong{
+  color:#444;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  padding:14px 16px;
+  background:#f3f3f3;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.ok{
+  border-left:4px solid #20a36a;
+}
+
+.warn{
+  border-left:4px solid #d59b30;
+}
+
+.err{
+  border-left:4px solid #c94b4b;
+}
+
+
+/* =========================
+   CONSULTATION
+========================= */
+
+.consult{
+  background:var(--navy);
+  color:#fff;
+}
+
+.consult .title{
+  color:#fff;
+}
+
+.form{
+  max-width:760px;
+  display:grid;
+  gap:14px;
+}
+
+.form input:not([type="checkbox"]),
+.form textarea{
+  width:100%;
+  padding:17px 16px;
+  border:1px solid #46515a;
+  background:#151e25;
+  color:#fff;
+  outline:none;
+  font-size:14px;
+  transition:.2s;
+}
+
+.form input:not([type="checkbox"]):focus,
+.form textarea:focus{
+  border-color:var(--gold);
+}
+
+.form input::placeholder,
+.form textarea::placeholder{
+  color:#78838c;
+}
+
+.form textarea{
+  min-height:170px;
+  resize:vertical;
+}
+
+.consent{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#d8dde0;
+  font-size:14px;
+  line-height:1.6;
+  cursor:pointer;
+}
+
+.consent input{
+  width:17px;
+  height:17px;
+  accent-color:var(--gold);
+}
+
+.form .btn{
+  width:100%;
+  min-height:56px;
+  font-size:15px;
+  font-weight:600;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:#080909;
+  color:#777;
+  padding:50px 0;
+  font-size:13px;
+  line-height:1.8;
+}
+
+footer small{
+  color:#555;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:800px){
-  nav{
-    display:none
+
+  .wrap{
+    width:min(100% - 32px,1180px);
   }
 
-  .grid{
-    grid-template-columns:1fr
+  .nav{
+    height:68px;
+  }
+
+  .logo{
+    font-size:21px;
+    letter-spacing:5px;
+  }
+
+  nav{
+    display:none;
+  }
+
+  section{
+    padding:75px 0;
   }
 
   .hero{
-    min-height:620px;
+    min-height:680px;
   }
 
   .hero-copy{
-    padding:80px 0;
+    padding:85px 0;
+  }
+
+  .hero .label{
+    font-size:10px;
+    letter-spacing:3px;
+    margin-bottom:24px;
   }
 
   .hero h1{
-    font-size:clamp(48px,13vw,68px);
-    letter-spacing:-3px;
+    font-size:clamp(46px,13vw,70px);
+    line-height:1.12;
+    letter-spacing:-4px;
   }
 
   .hero-desc{
+    margin-top:32px;
     font-size:16px;
+    line-height:1.8;
   }
 
   .hero-actions{
     flex-direction:column;
     align-items:flex-start;
     gap:22px;
+    margin-top:35px;
   }
 
   .hero-note{
     margin-top:55px;
   }
+
+  .title{
+    font-size:34px;
+    letter-spacing:-1.5px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    min-height:auto;
+  }
+
+  .form{
+    max-width:none;
+  }
+}
+
+@media(max-width:480px){
+
+  .hero{
+    min-height:640px;
+  }
+
+  .hero h1{
+    font-size:46px;
+  }
+
+  .hero-desc{
+    font-size:15px;
+  }
+
+  .hero::after{
+    width:400px;
+    height:400px;
+    right:-250px;
+  }
 }
 </style>
 </head>
+
+
 <body>
-<header><div class="wrap nav"><a class="logo" href="#">SA YUL</a><nav><a href="#cases">사건사례</a><a href="#consult">상담신청</a><a href="admin.html">관리자</a></nav></div></header>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+  <div class="wrap nav">
+
+    <a class="logo" href="#">SA YUL</a>
+
+    <nav>
+      <a href="#cases">사건사례</a>
+      <a href="#consult">상담신청</a>
+      <a href="admin.html">관리자</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
+
   <div class="wrap hero-inner">
 
     <div class="hero-copy">
-      <div class="label">LAW OFFICE SA YUL · ATTORNEY AT LAW</div>
+
+      <div class="label">
+        LAW OFFICE SA YUL · ATTORNEY AT LAW
+      </div>
 
       <h1>
         법률을 넘어,<br>
@@ -188,85 +622,539 @@ footer{background:#080909;color:#888;padding:50px 0}
       </p>
 
       <div class="hero-actions">
-        <a class="btn hero-btn" href="#consult">상담 신청하기</a>
-        <a class="hero-link" href="#cases">사건사례 보기 <span>→</span></a>
+
+        <a class="btn hero-btn" href="#consult">
+          상담 신청하기
+        </a>
+
+        <a class="hero-link" href="#cases">
+          사건사례 보기 <span>→</span>
+        </a>
+
       </div>
 
       <div class="hero-note">
         <span></span>
         서울 · 사율 법률사무소
       </div>
+
     </div>
 
   </div>
+
 </section>
 
-<section id="consult" class="consult"><div class="wrap">
-<div class="label">CONSULTATION</div><h2 class="title">상담신청 DB 테스트</h2>
-<form id="consultForm" class="form">
-<input id="name" required placeholder="성명">
-<input id="phone" required placeholder="연락처">
-<textarea id="message" required placeholder="상담내용"></textarea>
-<label><input id="consent" type="checkbox" required> 개인정보 수집·이용에 동의합니다.</label>
-<button class="btn" type="submit">상담신청 저장 테스트</button>
-</form>
-<div id="consultStatus" class="status" style="margin-top:18px">아직 제출하지 않았습니다.</div>
-</div></section>
 
-<footer><div class="wrap">법률사무소 사율 · CMS 실연동 테스트<br><small>실제 운영 전 개인정보/법률문구 및 관리자 보안 설정을 최종 점검하세요.</small></div></footer>
+<!-- =========================
+     CASE
+========================= -->
+
+<section id="cases" class="case">
+
+  <div class="wrap">
+
+    <div class="label">
+      CASE
+    </div>
+
+    <h2 class="title">
+      사율의 사건사례
+    </h2>
+
+    <div id="caseStatus" class="status case-status">
+      DB 연결 확인 중...
+    </div>
+
+    <div id="caseGrid" class="grid"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CONSULTATION
+========================= -->
+
+<section id="consult" class="consult">
+
+  <div class="wrap">
+
+    <div class="label">
+      CONSULTATION
+    </div>
+
+    <h2 class="title">
+      상담신청
+    </h2>
+
+    <form id="consultForm" class="form">
+
+      <input
+        id="name"
+        name="name"
+        type="text"
+        required
+        autocomplete="name"
+        placeholder="성명"
+      >
+
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        required
+        autocomplete="tel"
+        placeholder="연락처"
+      >
+
+      <textarea
+        id="message"
+        name="message"
+        required
+        autocomplete="off"
+        placeholder="상담내용"
+      ></textarea>
+
+      <label class="consent">
+        <input
+          id="consent"
+          name="consent"
+          type="checkbox"
+          required
+        >
+        개인정보 수집·이용에 동의합니다.
+      </label>
+
+      <button
+        class="btn"
+        type="submit"
+      >
+        상담신청하기
+      </button>
+
+    </form>
+
+    <div
+      id="consultStatus"
+      class="status"
+      style="margin-top:18px"
+    >
+      상담신청 내용을 입력해주세요.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="wrap">
+
+    법률사무소 사율 · SA YUL LAW OFFICE
+
+    <br>
+
+    <small>
+      실제 운영 전 개인정보 처리방침 및 법률 관련 문구를 최종 점검하세요.
+    </small>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { getConfig } from "./js/config.js";
-const cfg=getConfig();
-const caseStatus=document.getElementById("caseStatus");
-const caseGrid=document.getElementById("caseGrid");
-const consultStatus=document.getElementById("consultStatus");
 
-if(!cfg.url || !cfg.key){
-  caseStatus.className="status warn";
-  caseStatus.textContent="Supabase 연결정보가 아직 입력되지 않았습니다. js/config.js에 Project URL과 Publishable key를 넣어주세요.";
-}else{
-  const supabase=createClient(cfg.url,cfg.key);
-  try{
-    const {data,error}=await supabase.from("cases").select("id,category,title,summary,result,created_at").eq("published",true).order("created_at",{ascending:false});
-    if(error) throw error;
-    caseStatus.className="status ok";
-    caseStatus.textContent=`DB 연결 성공 · 공개 사건사례 ${data.length}건`;
-    caseGrid.innerHTML=data.length?data.map(x=>`
-      <article class="card"><div class="cat">${escapeHtml(x.category)}</div>
-      <h3>${escapeHtml(x.title)}</h3><p>${escapeHtml(x.summary)}</p>
-      ${x.result?`<p><strong>결과</strong> ${escapeHtml(x.result)}</p>`:""}</article>`).join("")
-      :'<div class="card">아직 등록된 공개 사건사례가 없습니다. 관리자 CMS에서 첫 사례를 등록해보세요.</div>';
-  }catch(e){
-    caseStatus.className="status err";
-    caseStatus.textContent="DB 연결/조회 실패: "+(e.message||e);
+import {
+  createClient
+} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+import {
+  getConfig
+} from "./js/config.js";
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const caseStatus =
+  document.getElementById("caseStatus");
+
+const caseGrid =
+  document.getElementById("caseGrid");
+
+const consultForm =
+  document.getElementById("consultForm");
+
+const consultStatus =
+  document.getElementById("consultStatus");
+
+
+/* =========================
+   CONFIG
+========================= */
+
+let cfg;
+
+try {
+
+  cfg = getConfig();
+
+} catch(error) {
+
+  console.error("config.js 오류:", error);
+
+  caseStatus.className = "status err";
+
+  caseStatus.textContent =
+    "설정 파일을 불러오지 못했습니다. js/config.js를 확인해주세요.";
+
+  cfg = null;
+}
+
+
+/* =========================
+   CONFIG CHECK
+========================= */
+
+if(
+  !cfg ||
+  !cfg.url ||
+  !cfg.key
+){
+
+  caseStatus.className =
+    "status warn";
+
+  caseStatus.textContent =
+    "Supabase 연결정보가 아직 설정되지 않았습니다. js/config.js의 Project URL과 Publishable key를 확인해주세요.";
+
+} else {
+
+
+  /* =========================
+     SUPABASE CLIENT
+  ========================= */
+
+  const supabase =
+    createClient(
+      cfg.url,
+      cfg.key
+    );
+
+
+  /* =========================
+     LOAD CASES
+  ========================= */
+
+  async function loadCases(){
+
+    caseStatus.className =
+      "status";
+
+    caseStatus.textContent =
+      "DB 연결 확인 중...";
+
+    caseGrid.innerHTML = "";
+
+
+    try{
+
+      const {
+        data,
+        error
+      } = await supabase
+
+        .from("cases")
+
+        .select(
+          "id,category,title,summary,result,created_at"
+        )
+
+        .eq(
+          "published",
+          true
+        )
+
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        );
+
+
+      if(error){
+        throw error;
+      }
+
+
+      const cases =
+        data || [];
+
+
+      caseStatus.className =
+        "status ok";
+
+      caseStatus.textContent =
+        `DB 연결 성공 · 공개 사건사례 ${cases.length}건`;
+
+
+      if(cases.length === 0){
+
+        caseGrid.innerHTML = `
+          <article class="card">
+            <div class="cat">CASE</div>
+            <h3>등록된 공개 사건사례가 없습니다.</h3>
+            <p>
+              관리자 페이지에서 사건사례를 등록하고
+              홈페이지 공개 여부를 확인해주세요.
+            </p>
+          </article>
+        `;
+
+        return;
+      }
+
+
+      caseGrid.innerHTML =
+        cases.map(item => {
+
+          const category =
+            escapeHtml(item.category);
+
+          const title =
+            escapeHtml(item.title);
+
+          const summary =
+            escapeHtml(item.summary);
+
+          const result =
+            item.result
+              ? `
+                <p>
+                  <strong>결과</strong>
+                  ${escapeHtml(item.result)}
+                </p>
+              `
+              : "";
+
+
+          return `
+            <article class="card">
+
+              <div class="cat">
+                ${category}
+              </div>
+
+              <h3>
+                ${title}
+              </h3>
+
+              <p>
+                ${summary}
+              </p>
+
+              ${result}
+
+            </article>
+          `;
+
+        }).join("");
+
+
+    }catch(error){
+
+      console.error(
+        "사건사례 조회 오류:",
+        error
+      );
+
+      caseStatus.className =
+        "status err";
+
+      caseStatus.textContent =
+        "DB 연결/조회 실패: " +
+        (error.message || error);
+
+    }
+
   }
 
-  document.getElementById("consultForm").addEventListener("submit",async ev=>{
-    ev.preventDefault();
-    consultStatus.className="status";
-    consultStatus.textContent="저장 중…";
-    try{
-      const consentAt=new Date().toISOString();
-      const {error}=await supabase.from("inquiries").insert({
-        name:document.getElementById("name").value.trim(),
-        phone:document.getElementById("phone").value.trim(),
-        message:document.getElementById("message").value.trim(),
-        privacy_consent:true,
-        consent_at:consentAt
-      });
-      if(error) throw error;
-      consultStatus.className="status ok";
-      consultStatus.textContent="상담신청 저장 성공 · 이제 관리자 CMS에서 확인할 수 있습니다.";
-      ev.target.reset();
-    }catch(e){
-      consultStatus.className="status err";
-      consultStatus.textContent="상담신청 저장 실패: "+(e.message||e);
+
+  /* =========================
+     LOAD CASES
+  ========================= */
+
+  await loadCases();
+
+
+  /* =========================
+     CONSULTATION SUBMIT
+  ========================= */
+
+  consultForm.addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      const name =
+        document
+          .getElementById("name")
+          .value
+          .trim();
+
+
+      const phone =
+        document
+          .getElementById("phone")
+          .value
+          .trim();
+
+
+      const message =
+        document
+          .getElementById("message")
+          .value
+          .trim();
+
+
+      const consent =
+        document
+          .getElementById("consent")
+          .checked;
+
+
+      if(
+        !name ||
+        !phone ||
+        !message ||
+        !consent
+      ){
+
+        consultStatus.className =
+          "status warn";
+
+        consultStatus.textContent =
+          "필수 항목을 모두 입력하고 개인정보 수집·이용에 동의해주세요.";
+
+        return;
+      }
+
+
+      consultStatus.className =
+        "status";
+
+      consultStatus.textContent =
+        "상담신청을 저장하는 중입니다...";
+
+
+      try{
+
+        const consentAt =
+          new Date().toISOString();
+
+
+        const {
+          error
+        } = await supabase
+
+          .from("inquiries")
+
+          .insert({
+
+            name:name,
+
+            phone:phone,
+
+            message:message,
+
+            privacy_consent:true,
+
+            consent_at:consentAt
+
+          });
+
+
+        if(error){
+          throw error;
+        }
+
+
+        consultStatus.className =
+          "status ok";
+
+        consultStatus.textContent =
+          "상담신청이 정상적으로 저장되었습니다. 관리자 페이지에서 확인할 수 있습니다.";
+
+
+        consultForm.reset();
+
+
+      }catch(error){
+
+        console.error(
+          "상담신청 저장 오류:",
+          error
+        );
+
+
+        consultStatus.className =
+          "status err";
+
+        consultStatus.textContent =
+          "상담신청 저장 실패: " +
+          (error.message || error);
+
+      }
+
     }
-  });
+  );
+
 }
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+
+
+/* =========================
+   HTML ESCAPE
+========================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    function(character){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[character];
+
+    }
+  );
+
+}
+
 </script>
+
 </body>
 </html>
