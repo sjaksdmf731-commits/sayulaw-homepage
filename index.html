@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>법률사무소 사율 | 실연동 테스트</title>
+<style>
+:root{--black:#0b0d0f;--navy:#101820;--gold:#b99a61;--cream:#f5f2eb}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;color:#222;background:#fff}
+a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:#0b0d0fee;color:#fff;border-bottom:1px solid #333}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font:22px Georgia;letter-spacing:5px;color:#fff}
+nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-flex;padding:12px 18px;background:var(--gold);color:#fff;border:0;cursor:pointer}
+.hero{background:linear-gradient(90deg,#060708,#16232e);color:#fff;padding:110px 0}.hero h1{font-size:clamp(42px,6vw,78px);font-weight:300;margin:0}.hero strong{display:block}.hero p{max-width:650px;line-height:2;color:#aaa}
+section{padding:90px 0}.label{color:var(--gold);letter-spacing:3px;font-size:11px;margin-bottom:14px}.title{font-size:42px;margin:0 0 35px}
+.case{background:var(--cream)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;padding:26px;min-height:190px}.card .cat{color:var(--gold);font-size:11px}.card h3{font-size:18px;line-height:1.6}.card p{color:#777;line-height:1.8;font-size:13px}
+.consult{background:#101820;color:#fff}.form{max-width:650px;display:grid;gap:12px}.form input,.form textarea{width:100%;padding:14px;border:1px solid #555;background:#151d23;color:#fff}.form textarea{min-height:140px}
+.status{padding:12px 15px;background:#f3f3f3;margin-bottom:20px;font-size:13px}.ok{border-left:4px solid #20a36a}.warn{border-left:4px solid #d59b30}.err{border-left:4px solid #c94b4b}
+footer{background:#080909;color:#888;padding:50px 0}
+@media(max-width:800px){nav{display:none}.grid{grid-template-columns:1fr}.hero{padding:80px 0}.title{font-size:34px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="#">SA YUL</a><nav><a href="#cases">사건사례</a><a href="#consult">상담신청</a><a href="admin.html">관리자</a></nav></div></header>
+
+<section class="hero"><div class="wrap">
+<div class="label">LAW OFFICE SA YUL · LIVE DB TEST</div>
+<h1>법률을 넘어,<strong>사람을 봅니다.</strong></h1>
+<p>현재 사율 홈페이지와 Supabase DB를 동시에 테스트하는 페이지입니다. 아래 사건사례는 DB에서 실시간으로 읽어옵니다.</p>
+<a class="btn" href="#consult">상담신청 테스트</a>
+</div></section>
+
+<section id="cases" class="case"><div class="wrap">
+<div class="label">CASE</div><h2 class="title">사율의 사건사례</h2>
+<div id="caseStatus" class="status">DB 연결 확인 중…</div>
+<div id="caseGrid" class="grid"></div>
+</div></section>
+
+<section id="consult" class="consult"><div class="wrap">
+<div class="label">CONSULTATION</div><h2 class="title">상담신청 DB 테스트</h2>
+<form id="consultForm" class="form">
+<input id="name" required placeholder="성명">
+<input id="phone" required placeholder="연락처">
+<textarea id="message" required placeholder="상담내용"></textarea>
+<label><input id="consent" type="checkbox" required> 개인정보 수집·이용에 동의합니다.</label>
+<button class="btn" type="submit">상담신청 저장 테스트</button>
+</form>
+<div id="consultStatus" class="status" style="margin-top:18px">아직 제출하지 않았습니다.</div>
+</div></section>
+
+<footer><div class="wrap">법률사무소 사율 · CMS 실연동 테스트<br><small>실제 운영 전 개인정보/법률문구 및 관리자 보안 설정을 최종 점검하세요.</small></div></footer>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { getConfig } from "./js/config.js";
+const cfg=getConfig();
+const caseStatus=document.getElementById("caseStatus");
+const caseGrid=document.getElementById("caseGrid");
+const consultStatus=document.getElementById("consultStatus");
+
+if(!cfg.url || !cfg.key){
+  caseStatus.className="status warn";
+  caseStatus.textContent="Supabase 연결정보가 아직 입력되지 않았습니다. js/config.js에 Project URL과 Publishable key를 넣어주세요.";
+}else{
+  const supabase=createClient(cfg.url,cfg.key);
+  try{
+    const {data,error}=await supabase.from("cases").select("id,category,title,summary,result,created_at").eq("published",true).order("created_at",{ascending:false});
+    if(error) throw error;
+    caseStatus.className="status ok";
+    caseStatus.textContent=`DB 연결 성공 · 공개 사건사례 ${data.length}건`;
+    caseGrid.innerHTML=data.length?data.map(x=>`
+      <article class="card"><div class="cat">${escapeHtml(x.category)}</div>
+      <h3>${escapeHtml(x.title)}</h3><p>${escapeHtml(x.summary)}</p>
+      ${x.result?`<p><strong>결과</strong> ${escapeHtml(x.result)}</p>`:""}</article>`).join("")
+      :'<div class="card">아직 등록된 공개 사건사례가 없습니다. 관리자 CMS에서 첫 사례를 등록해보세요.</div>';
+  }catch(e){
+    caseStatus.className="status err";
+    caseStatus.textContent="DB 연결/조회 실패: "+(e.message||e);
+  }
+
+  document.getElementById("consultForm").addEventListener("submit",async ev=>{
+    ev.preventDefault();
+    consultStatus.className="status";
+    consultStatus.textContent="저장 중…";
+    try{
+      const consentAt=new Date().toISOString();
+      const {error}=await supabase.from("inquiries").insert({
+        name:document.getElementById("name").value.trim(),
+        phone:document.getElementById("phone").value.trim(),
+        message:document.getElementById("message").value.trim(),
+        privacy_consent:true,
+        consent_at:consentAt
+      });
+      if(error) throw error;
+      consultStatus.className="status ok";
+      consultStatus.textContent="상담신청 저장 성공 · 이제 관리자 CMS에서 확인할 수 있습니다.";
+      ev.target.reset();
+    }catch(e){
+      consultStatus.className="status err";
+      consultStatus.textContent="상담신청 저장 실패: "+(e.message||e);
+    }
+  });
+}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+</script>
+</body>
+</html>
