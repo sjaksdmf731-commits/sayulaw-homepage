@@ -2,106 +2,35 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>법률사무소 사율 | 실연동 테스트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAYUL 법률사무소 | 법률을 넘어, 사람을 봅니다.</title>
+<meta name="description" content="법률사무소 SAYUL. 정확한 판단과 사람을 이해하는 시선으로 법률 문제를 해결합니다.">
 <style>
-:root{--black:#0b0d0f;--navy:#101820;--gold:#b99a61;--cream:#f5f2eb}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;color:#222;background:#fff}
-a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
-header{position:sticky;top:0;z-index:10;background:#0b0d0fee;color:#fff;border-bottom:1px solid #333}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font:22px Georgia;letter-spacing:5px;color:#fff}
-nav{display:flex;gap:22px;font-size:13px}nav a{color:#ddd}.btn{display:inline-flex;padding:12px 18px;background:var(--gold);color:#fff;border:0;cursor:pointer}
-.hero{background:linear-gradient(90deg,#060708,#16232e);color:#fff;padding:110px 0}.hero h1{font-size:clamp(42px,6vw,78px);font-weight:300;margin:0}.hero strong{display:block}.hero p{max-width:650px;line-height:2;color:#aaa}
-section{padding:90px 0}.label{color:var(--gold);letter-spacing:3px;font-size:11px;margin-bottom:14px}.title{font-size:42px;margin:0 0 35px}
-.case{background:var(--cream)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;padding:26px;min-height:190px}.card .cat{color:var(--gold);font-size:11px}.card h3{font-size:18px;line-height:1.6}.card p{color:#777;line-height:1.8;font-size:13px}
-.consult{background:#101820;color:#fff}.form{max-width:650px;display:grid;gap:12px}.form input,.form textarea{width:100%;padding:14px;border:1px solid #555;background:#151d23;color:#fff}.form textarea{min-height:140px}
-.status{padding:12px 15px;background:#f3f3f3;margin-bottom:20px;font-size:13px}.ok{border-left:4px solid #20a36a}.warn{border-left:4px solid #d59b30}.err{border-left:4px solid #c94b4b}
-footer{background:#080909;color:#888;padding:50px 0}
-@media(max-width:800px){nav{display:none}.grid{grid-template-columns:1fr}.hero{padding:80px 0}.title{font-size:34px}}
+:root{--ink:#101218;--deep:#17191e;--gold:#c6a469;--gold-pale:#efe5d4;--paper:#f7f5f0;--white:#fff;--muted:#71737a;--line:rgba(16,18,24,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans KR",Arial,sans-serif;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}.wrap{width:min(1200px,calc(100% - 48px));margin:auto}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.22em;font-weight:700}.btn{display:inline-flex;justify-content:center;align-items:center;min-height:54px;padding:0 27px;background:var(--gold);border:1px solid var(--gold);color:#fff;font-size:13px;font-weight:700;letter-spacing:.04em;transition:.25s}.btn:hover{background:#b18c4d;border-color:#b18c4d;transform:translateY(-2px)}.text-link{display:inline-flex;gap:12px;align-items:center;font-size:13px;font-weight:700}.text-link span{color:var(--gold);font-size:18px;transition:.2s}.text-link:hover span{transform:translateX(4px)}
+header{position:absolute;z-index:3;top:0;width:100%;border-bottom:1px solid rgba(255,255,255,.2);color:#fff}.nav{height:92px;display:flex;align-items:center;justify-content:space-between}.logo{font-family:Georgia,serif;font-size:25px;font-weight:700;letter-spacing:.03em}nav{display:flex;align-items:center;gap:32px;font-size:13px}nav a{opacity:.84}nav a:hover{opacity:1}.nav-admin{padding:10px 14px;border:1px solid rgba(255,255,255,.55)}
+.hero{min-height:790px;position:relative;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#202128}.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,10,13,.94) 0%,rgba(9,10,13,.71) 48%,rgba(9,10,13,.22) 100%),linear-gradient(0deg,rgba(9,10,13,.45),transparent 52%);z-index:1}.hero-photo{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=85") center/cover no-repeat;filter:grayscale(25%)}.hero-content{position:relative;z-index:2;padding:0 0 105px;max-width:780px}.hero h1{margin:21px 0 24px;font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(55px,7vw,100px);font-weight:400;line-height:1.08;letter-spacing:-.06em}.hero h1 em{font-style:normal;color:#e7d4ae}.hero p{max-width:510px;margin:0;color:rgba(255,255,255,.78);font-size:17px;line-height:1.9;word-break:keep-all}.hero-actions{display:flex;align-items:center;gap:28px;margin-top:42px}.hero .text-link{color:#fff}.hero-mark{position:absolute;right:0;bottom:104px;z-index:2;display:flex;align-items:center;gap:14px;color:rgba(255,255,255,.7);font-size:11px;letter-spacing:.16em;writing-mode:vertical-rl}.hero-mark::before{content:"";height:56px;border-left:1px solid var(--gold)}
+.intro{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;padding:126px 0}.intro h2,.section-title{margin:18px 0 0;font-family:Georgia,"Noto Serif KR",serif;font-weight:400;font-size:clamp(34px,4vw,55px);line-height:1.25;letter-spacing:-.055em}.intro p{align-self:end;margin:0;color:var(--muted);font-size:16px;line-height:2;word-break:keep-all}.intro p strong{color:var(--ink);font-weight:700}
+.case{padding:110px 0;background:#e9e5dd}.section-top{display:flex;align-items:end;justify-content:space-between;margin-bottom:45px}.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.case-card{position:relative;min-height:400px;padding:31px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;overflow:hidden;background:#222}.case-card::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,12,15,.9),rgba(11,12,15,.05) 76%);z-index:1}.case-card:nth-child(1){background:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80") center/cover}.case-card:nth-child(2){background:url("https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=900&q=80") center/cover}.case-card:nth-child(3){background:url("https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=900&q=80") center/cover}.case-card>*{position:relative;z-index:2}.case-card .num{margin-bottom:auto;font-family:Georgia,serif;font-size:22px;color:#e8d1a7}.case-card .cat{color:#e8d1a7;font-size:11px;letter-spacing:.14em}.case-card h3{margin:13px 0 10px;font-family:Georgia,"Noto Serif KR",serif;font-size:24px;font-weight:400;line-height:1.35;letter-spacing:-.04em}.case-card p{margin:0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.7}.case-status{display:none}
+.consult{padding:120px 0;background:var(--deep);color:#fff}.consult-layout{display:grid;grid-template-columns:.86fr 1.14fr;gap:100px}.consult-copy{padding-top:8px}.consult-copy h2{margin:18px 0 24px;font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(38px,4vw,58px);font-weight:400;line-height:1.2;letter-spacing:-.055em}.consult-copy p{max-width:340px;color:rgba(255,255,255,.65);line-height:1.9;font-size:15px}.contact-line{margin-top:50px;color:#d4b782;font-size:13px;letter-spacing:.09em}.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;border:0;border-bottom:1px solid rgba(255,255,255,.35);border-radius:0;padding:17px 2px;background:transparent;color:#fff;font:inherit;font-size:14px;outline:0}.form input:focus,.form textarea:focus{border-color:var(--gold)}.form textarea{grid-column:span 2;min-height:112px;resize:vertical}.form input::placeholder,.form textarea::placeholder{color:rgba(255,255,255,.45)}.consent{grid-column:span 2;display:flex;gap:10px;align-items:center;color:rgba(255,255,255,.62);font-size:12px}.consent input{accent-color:var(--gold)}.form .btn{grid-column:span 2;margin-top:10px;width:100%;min-height:60px}.status{grid-column:span 2;padding:13px 14px;font-size:12px;line-height:1.6;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}.ok{border-left:3px solid #67b88e}.warn{border-left:3px solid #d2a956}.err{border-left:3px solid #d76868}
+footer{padding:42px 0;background:#0e1014;color:rgba(255,255,255,.48);font-size:12px;line-height:1.8}.footer-row{display:flex;justify-content:space-between;gap:20px}.footer-logo{font-family:Georgia,serif;font-size:19px;font-weight:700;color:#fff}
+@media(max-width:800px){.wrap{width:min(100% - 34px,1200px)}header{position:absolute}.nav{height:70px}nav{display:none}.hero{min-height:680px}.hero-content{padding-bottom:70px}.hero h1{font-size:55px}.hero-mark{display:none}.intro,.consult-layout{grid-template-columns:1fr;gap:35px}.intro{padding:80px 0}.case,.consult{padding:80px 0}.section-top{display:block}.section-top .text-link{margin-top:22px}.case-grid{grid-template-columns:1fr}.case-card{min-height:310px}.form{grid-template-columns:1fr}.form textarea,.consent,.form .btn,.status{grid-column:span 1}.footer-row{display:block}.footer-row p{margin-top:14px}}
 </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="logo" href="#">SA YUL</a><nav><a href="#cases">사건사례</a><a href="#consult">상담신청</a><a href="admin.html">관리자</a></nav></div></header>
-
-<section class="hero"><div class="wrap">
-<div class="label">LAW OFFICE SA YUL · LIVE DB TEST</div>
-<h1>법률을 넘어,<strong>사람을 봅니다.</strong></h1>
-<p>현재 사율 홈페이지와 Supabase DB를 동시에 테스트하는 페이지입니다. 아래 사건사례는 DB에서 실시간으로 읽어옵니다.</p>
-<a class="btn" href="#consult">상담신청 테스트</a>
-</div></section>
-
-<section id="cases" class="case"><div class="wrap">
-<div class="label">CASE</div><h2 class="title">사율의 사건사례</h2>
-<div id="caseStatus" class="status">DB 연결 확인 중…</div>
-<div id="caseGrid" class="grid"></div>
-</div></section>
-
-<section id="consult" class="consult"><div class="wrap">
-<div class="label">CONSULTATION</div><h2 class="title">상담신청 DB 테스트</h2>
-<form id="consultForm" class="form">
-<input id="name" required placeholder="성명">
-<input id="phone" required placeholder="연락처">
-<textarea id="message" required placeholder="상담내용"></textarea>
-<label><input id="consent" type="checkbox" required> 개인정보 수집·이용에 동의합니다.</label>
-<button class="btn" type="submit">상담신청 저장 테스트</button>
-</form>
-<div id="consultStatus" class="status" style="margin-top:18px">아직 제출하지 않았습니다.</div>
-</div></section>
-
-<footer><div class="wrap">법률사무소 사율 · CMS 실연동 테스트<br><small>실제 운영 전 개인정보/법률문구 및 관리자 보안 설정을 최종 점검하세요.</small></div></footer>
-
+<header><div class="wrap nav"><a class="logo" href="#">SAYUL</a><nav><a href="#about">사율의 시선</a><a href="#cases">사건사례</a><a href="#consult">상담신청</a><a class="nav-admin" href="admin.html">관리자</a></nav></div></header>
+<main>
+<section class="hero"><div class="hero-photo"></div><div class="wrap hero-content"><div class="eyebrow">LAW OFFICE SAYUL · SEOUL</div><h1>법률을 넘어,<br><em>사람을 봅니다.</em></h1><p>중요한 순간의 선택이 흔들리지 않도록.<br>사율은 치밀한 법률적 판단과 깊이 있는 이해로 함께합니다.</p><div class="hero-actions"><a class="btn" href="#consult">상담 신청하기</a><a class="text-link" href="#cases">사건사례 살펴보기 <span>→</span></a></div></div><div class="hero-mark">TRUST · INSIGHT · SOLUTION</div></section>
+<section id="about"><div class="wrap intro"><div><div class="eyebrow">OUR PERSPECTIVE</div><h2>정답보다 먼저,<br>당신의 상황을<br>정확히 읽습니다.</h2></div><p>법률 문제에는 언제나 사람의 삶이 있습니다. <strong>SAYUL</strong>은 조급한 결론 대신 충분한 대화와 분석을 바탕으로, 가장 현실적인 해결의 방향을 제시합니다.</p></div></section>
+<section id="cases" class="case"><div class="wrap"><div class="section-top"><div><div class="eyebrow">SELECTED CASES</div><h2 class="section-title">사율의 사건사례</h2></div><a class="text-link" href="#consult">나의 상황 상담하기 <span>→</span></a></div><div id="caseGrid" class="case-grid"><article class="case-card"><div class="num">01</div><div class="cat">CIVIL · 민사</div><h3>복잡한 분쟁의 핵심을<br>명확하게 정리합니다.</h3><p>사실관계와 증거를 바탕으로 최선의 해결 전략을 설계합니다.</p></article><article class="case-card"><div class="num">02</div><div class="cat">CORPORATE · 기업</div><h3>사업의 중요한 결정을<br>법률로 뒷받침합니다.</h3><p>리스크를 줄이고 다음 단계로 나아갈 수 있도록 함께합니다.</p></article><article class="case-card"><div class="num">03</div><div class="cat">FAMILY · 가사</div><h3>삶의 전환점에서<br>섬세한 해법을 찾습니다.</h3><p>당사자의 마음과 현실을 함께 고려한 조력을 제공합니다.</p></article></div><div id="caseStatus" class="case-status"></div></div></section>
+<section id="consult" class="consult"><div class="wrap consult-layout"><div class="consult-copy"><div class="eyebrow">CONSULTATION</div><h2>첫 상담이<br>해결의 방향을<br>바꿉니다.</h2><p>현재 상황을 편하게 남겨주세요. 내용을 검토한 뒤 상담 절차를 안내해 드립니다.</p><div class="contact-line">SAYUL LAW OFFICE · SEOUL</div></div><form id="consultForm" class="form"><input id="name" name="name" required autocomplete="name" placeholder="성명"><input id="phone" name="phone" required autocomplete="tel" placeholder="연락처"><textarea id="message" name="message" required placeholder="상담이 필요한 내용을 간단히 적어주세요"></textarea><label class="consent"><input id="consent" name="consent" type="checkbox" required> 개인정보 수집·이용에 동의합니다.</label><button class="btn" type="submit">상담 내용 보내기</button><div id="consultStatus" class="status">상담 내용을 남겨주시면 확인 후 안내해 드리겠습니다.</div></form></div></section>
+</main>
+<footer><div class="wrap footer-row"><div><div class="footer-logo">SAYUL</div><p>법률사무소 사율 · SA YUL LAW OFFICE</p></div><p>실제 운영 전 개인정보 처리방침 및 법률 관련 문구를 최종 점검하세요.</p></div></footer>
 <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { getConfig } from "./js/config.js";
-const cfg=getConfig();
-const caseStatus=document.getElementById("caseStatus");
-const caseGrid=document.getElementById("caseGrid");
-const consultStatus=document.getElementById("consultStatus");
-
-if(!cfg.url || !cfg.key){
-  caseStatus.className="status warn";
-  caseStatus.textContent="Supabase 연결정보가 아직 입력되지 않았습니다. js/config.js에 Project URL과 Publishable key를 넣어주세요.";
-}else{
-  const supabase=createClient(cfg.url,cfg.key);
-  try{
-    const {data,error}=await supabase.from("cases").select("id,category,title,summary,result,created_at").eq("published",true).order("created_at",{ascending:false});
-    if(error) throw error;
-    caseStatus.className="status ok";
-    caseStatus.textContent=`DB 연결 성공 · 공개 사건사례 ${data.length}건`;
-    caseGrid.innerHTML=data.length?data.map(x=>`
-      <article class="card"><div class="cat">${escapeHtml(x.category)}</div>
-      <h3>${escapeHtml(x.title)}</h3><p>${escapeHtml(x.summary)}</p>
-      ${x.result?`<p><strong>결과</strong> ${escapeHtml(x.result)}</p>`:""}</article>`).join("")
-      :'<div class="card">아직 등록된 공개 사건사례가 없습니다. 관리자 CMS에서 첫 사례를 등록해보세요.</div>';
-  }catch(e){
-    caseStatus.className="status err";
-    caseStatus.textContent="DB 연결/조회 실패: "+(e.message||e);
-  }
-
-  document.getElementById("consultForm").addEventListener("submit",async ev=>{
-    ev.preventDefault();
-    consultStatus.className="status";
-    consultStatus.textContent="저장 중…";
-    try{
-      const consentAt=new Date().toISOString();
-      const {error}=await supabase.from("inquiries").insert({
-        name:document.getElementById("name").value.trim(),
-        phone:document.getElementById("phone").value.trim(),
-        message:document.getElementById("message").value.trim(),
-        privacy_consent:true,
-        consent_at:consentAt
-      });
-      if(error) throw error;
-      consultStatus.className="status ok";
-      consultStatus.textContent="상담신청 저장 성공 · 이제 관리자 CMS에서 확인할 수 있습니다.";
-      ev.target.reset();
-    }catch(e){
-      consultStatus.className="status err";
-      consultStatus.textContent="상담신청 저장 실패: "+(e.message||e);
-    }
-  });
-}
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import {getConfig} from "./js/config.js";
+const form=document.getElementById("consultForm"), status=document.getElementById("consultStatus");
+let cfg;try{cfg=getConfig()}catch(e){cfg=null}
+if(!cfg?.url||!cfg?.key){status.className="status warn";status.textContent="상담 신청 설정을 준비 중입니다. 잠시 후 다시 이용해주세요."}else{const supabase=createClient(cfg.url,cfg.key);form.addEventListener("submit",async e=>{e.preventDefault();status.className="status";status.textContent="상담 내용을 보내는 중입니다...";try{const {error}=await supabase.from("inquiries").insert({name:document.getElementById("name").value.trim(),phone:document.getElementById("phone").value.trim(),message:document.getElementById("message").value.trim(),privacy_consent:true,consent_at:new Date().toISOString()});if(error)throw error;status.className="status ok";status.textContent="상담 내용이 정상적으로 전달되었습니다. 빠르게 확인하겠습니다.";form.reset()}catch(error){status.className="status err";status.textContent="전송에 실패했습니다: "+(error.message||error)}})}
 </script>
-</body>
-</html>
+</body></html>
