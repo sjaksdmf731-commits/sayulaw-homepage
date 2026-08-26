@@ -30,6 +30,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;bord
 <input id="caseTitle" placeholder="제목">
 <textarea id="caseSummary" placeholder="사건 개요/내용"></textarea>
 <input id="caseResult" placeholder="결과">
+<label>사건 이미지 (JPG · PNG · BMP, 최대 5MB)<input id="caseImage" type="file" accept=".jpg,.jpeg,.png,.bmp,image/jpeg,image/png,image/bmp"></label>
 <label><input id="casePublished" type="checkbox" checked> 홈페이지 공개</label><br>
 <button id="addCase">등록</button>
 </div>
@@ -70,16 +71,33 @@ else{
  };
  logout.onclick=async()=>{await sb.auth.signOut();location.reload()};
 
+ async function uploadCaseImage(){
+   const file=document.getElementById("caseImage").files[0];
+   if(!file)return null;
+   const allowed=["image/jpeg","image/png","image/bmp"];
+   if(!allowed.includes(file.type)||file.size>5*1024*1024)throw new Error("JPG, PNG, BMP 파일만 5MB 이하로 올릴 수 있습니다.");
+   const extension=file.name.split(".").pop().toLowerCase();
+   const path="cases/"+crypto.randomUUID()+"."+extension;
+   const {error}=await sb.storage.from("case-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type});
+   if(error)throw error;
+   const {data}=sb.storage.from("case-images").getPublicUrl(path);
+   return data.publicUrl;
+ }
  document.getElementById("addCase").onclick=async()=>{
-   const {error}=await sb.from("cases").insert({category:caseCategory.value.trim(),title:caseTitle.value.trim(),summary:caseSummary.value.trim(),result:caseResult.value.trim(),published:casePublished.checked});
-   status.className=error?"status err":"status ok";status.textContent=error?"사건사례 등록 실패: "+error.message:"사건사례 등록 성공";if(!error){caseCategory.value=caseTitle.value=caseSummary.value=caseResult.value="";loadCases();}
+   try{
+     status.className="status";status.textContent="사건사례와 이미지를 저장하는 중…";
+     const image_url=await uploadCaseImage();
+     const {error}=await sb.from("cases").insert({category:caseCategory.value.trim(),title:caseTitle.value.trim(),summary:caseSummary.value.trim(),result:caseResult.value.trim(),image_url,published:casePublished.checked});
+     if(error)throw error;
+     status.className="status ok";status.textContent="사건사례 등록 성공";caseCategory.value=caseTitle.value=caseSummary.value=caseResult.value="";document.getElementById("caseImage").value="";loadCases();
+   }catch(error){status.className="status err";status.textContent="사건사례 등록 실패: "+error.message;}
  };
  document.getElementById("addNotice").onclick=async()=>{
    const {error}=await sb.from("notices").insert({title:noticeTitle.value.trim(),content:noticeContent.value.trim(),published:noticePublished.checked});
    status.className=error?"status err":"status ok";status.textContent=error?"공지 등록 실패: "+error.message:"공지 등록 성공";if(!error){noticeTitle.value=noticeContent.value="";loadNotices();}
  };
  async function loadAll(){loadCases();loadNotices();loadInquiries();}
- async function loadCases(){const {data,error}=await sb.from("cases").select("*").order("created_at",{ascending:false});cases.innerHTML=error?error.message:(data?.length?`<table><tr><th>분야</th><th>제목</th><th>공개</th><th>작업</th></tr>${data.map(x=>`<tr><td>${h(x.category)}</td><td>${h(x.title)}</td><td>${x.published?"공개":"비공개"}</td><td><button class="danger" onclick="deleteCase('${x.id}')">삭제</button></td></tr>`).join("")}</table>`:"등록된 사건사례 없음");}
+ async function loadCases(){const {data,error}=await sb.from("cases").select("*").order("created_at",{ascending:false});cases.innerHTML=error?error.message:(data?.length?`<table><tr><th>분야</th><th>제목</th><th>이미지</th><th>공개</th><th>작업</th></tr>${data.map(x=>`<tr><td>${h(x.category)}</td><td>${h(x.title)}</td><td>${x.image_url?'<img src="'+h(x.image_url)+'" alt="" style="width:72px;height:48px;object-fit:cover">':"없음"}</td><td>${x.published?"공개":"비공개"}</td><td><button class="danger" onclick="deleteCase('${x.id}')">삭제</button></td></tr>`).join("")}</table>`:"등록된 사건사례 없음");}
  async function loadNotices(){const {data,error}=await sb.from("notices").select("*").order("created_at",{ascending:false});notices.innerHTML=error?error.message:(data?.length?`<table><tr><th>제목</th><th>공개</th><th>작업</th></tr>${data.map(x=>`<tr><td>${h(x.title)}</td><td>${x.published?"공개":"비공개"}</td><td><button class="danger" onclick="deleteNotice('${x.id}')">삭제</button></td></tr>`).join("")}</table>`:"등록된 공지 없음");}
  async function loadInquiries(){const {data,error}=await sb.from("inquiries").select("*").order("created_at",{ascending:false});inquiries.innerHTML=error?error.message:(data?.length?`<table><tr><th>성명</th><th>연락처</th><th>내용</th><th>상태</th></tr>${data.map(x=>`<tr><td>${h(x.name)}</td><td>${h(x.phone)}</td><td>${h(x.message)}</td><td><select onchange="setStatus('${x.id}',this.value)"><option ${x.status==="new"?"selected":""} value="new">신규</option><option ${x.status==="contacted"?"selected":""} value="contacted">연락완료</option><option ${x.status==="done"?"selected":""} value="done">처리완료</option></select></td></tr>`).join("")}</table>`:"상담신청 없음");}
  window.deleteCase=async id=>{const {error}=await sb.from("cases").delete().eq("id",id);if(error)status.textContent=error.message;else loadCases()};
