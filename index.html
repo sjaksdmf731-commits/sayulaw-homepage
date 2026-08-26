@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if("scrollRestoration" in history)history.scrollRestoration="auto";if(location.hash)history.replaceState(null,"",location.pathname+location.search);</script>
 <title>SAYUL 법률사무소 | 법률을 넘어, 사람을 봅니다.</title>
 <link rel="icon" type="image/svg+xml" href="assets/sayul-mark.svg">
 <meta name="description" content="법률사무소 SAYUL. 정확한 판단과 사람을 이해하는 시선으로 법률 문제를 해결합니다.">
@@ -37,6 +38,7 @@ header{position:absolute;z-index:3;top:0;width:100%;border-bottom:1px solid rgba
 import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import {getConfig} from "./js/config.js";
 const form=document.getElementById("consultForm"), status=document.getElementById("consultStatus"), caseGrid=document.getElementById("caseGrid"), noticeGrid=document.getElementById("noticeGrid");
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener("click",event=>{const target=document.querySelector(link.getAttribute("href"));if(!target)return;event.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",location.pathname+location.search);}));
 let cfg;try{cfg=getConfig()}catch(e){cfg=null}
 const escapeHtml=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const safeImageUrl=v=>{try{const u=new URL(v);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return ""}};
