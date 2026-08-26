@@ -12,3 +12,9 @@
 window.SAYUL_SUPABASE_URL = "https://ldrkdcjffuiaaomeugfs.supabase.co";
 window.SAYUL_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_tT_NOgnCX1iTU2y0Ye2B_A_Z8yfLG5p";
 
+export function getConfig() {
+  return {
+    url: window.SAYUL_SUPABASE_URL,
+    key: window.SAYUL_SUPABASE_PUBLISHABLE_KEY
+  };
+}
