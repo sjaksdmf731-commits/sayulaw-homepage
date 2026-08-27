@@ -121,6 +121,21 @@ nav a:hover::after{right:0}
 }
 @media(prefers-reduced-motion:reduce){.location::before{animation:none}}
 
+
+/* map-provider-icons-20260827 */
+.map-provider-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:480px;margin-top:34px}
+.map-provider{display:flex;align-items:center;gap:10px;min-height:62px;padding:10px 13px;border:1px solid rgba(16,18,24,.13);background:rgba(255,255,255,.55);font-size:11px;font-weight:700;letter-spacing:.02em;transition:transform .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .25s ease}
+.map-provider:hover{transform:translateY(-3px);border-color:rgba(16,18,24,.22);background:#fff;box-shadow:0 10px 24px rgba(17,20,24,.1)}
+.map-provider-icon{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:9px;font-family:Arial,sans-serif;font-size:17px;font-weight:800}
+.map-provider.google .map-provider-icon{border:1px solid rgba(66,133,244,.22);background:#fff;color:#4285f4}
+.map-provider.naver .map-provider-icon{background:#03c75a;color:#fff}
+.map-provider.kakao .map-provider-icon{background:#fee500;color:#191919}
+.location-phone{margin-top:22px;width:max-content}
+@media(max-width:420px){
+ .map-provider-links{gap:7px}
+ .map-provider{flex-direction:column;justify-content:center;gap:6px;min-height:78px;padding:9px 5px;font-size:10px}
+}
+
 </style>
 </head>
 <body>
@@ -136,7 +151,7 @@ nav a:hover::after{right:0}
 2. 상담 희망 내용: 키워드로 기재 가능
    (예: 손해배상, 대여금 청구, 양육권 변경, 상간피고 등)
 3. 상담 방식: 전화상담 / 방문상담</textarea><p class="privacy-hint">주민등록번호·계좌 비밀번호 등 상담에 불필요한 민감정보는 입력하지 말아 주세요.</p><label class="consent"><input id="consent" name="consent" type="checkbox" required><span><strong>[필수] 개인정보 수집·이용 동의</strong><br>수집 항목: 성명, 연락처, 상담 내용 · 이용 목적: 상담 회신 및 사실 확인 · 보유 기간: 상담 목적 달성일로부터 1년<br>동의를 거부할 수 있으나, 거부 시 상담 신청이 제한됩니다.</span></label><button class="btn" type="submit">상담 신청하기</button><div id="consultStatus" class="status">상담 내용을 남겨주시면 확인 후 안내해 드리겠습니다.</div></form></div></section>
-<section id="location" class="location"><div class="wrap location-layout"><div class="location-copy"><div class="eyebrow">LOCATION</div><h2>법률사무소 사율<br>오시는 길</h2><div class="location-address"><span>ADDRESS</span><strong>서울특별시 강남구 테헤란로 152, 41층</strong><p>방문 상담은 예약 확정 후 진행됩니다.</p></div><div class="location-actions"><a class="btn" href="https://maps.app.goo.gl/F4ke2Hsu36C4Q9QQ9" target="_blank" rel="noopener noreferrer">구글 지도 열기</a><a class="text-link" href="tel:01029937031">전화 문의 <span>→</span></a></div></div><div class="map-frame"><iframe title="법률사무소 사율 위치 지도" src="https://www.google.com/maps?hl=ko&amp;q=37.500218671165,127.03648646492&amp;z=18&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div></section>
+<section id="location" class="location"><div class="wrap location-layout"><div class="location-copy"><div class="eyebrow">LOCATION</div><h2>법률사무소 사율<br>오시는 길</h2><div class="location-address"><span>ADDRESS</span><strong>서울특별시 강남구 테헤란로 152, 41층</strong><p>방문 상담은 예약 확정 후 진행됩니다.</p></div><div class="map-provider-links" aria-label="지도 앱에서 열기"><a class="map-provider google" href="https://maps.app.goo.gl/F4ke2Hsu36C4Q9QQ9" target="_blank" rel="noopener noreferrer" aria-label="구글 지도에서 열기"><span class="map-provider-icon" aria-hidden="true">G</span><span>Google</span></a><a class="map-provider naver" href="https://naver.me/FVFezswB" target="_blank" rel="noopener noreferrer" aria-label="네이버 지도에서 열기"><span class="map-provider-icon" aria-hidden="true">N</span><span>NAVER</span></a><a class="map-provider kakao" href="https://kko.to/JcleSRCqoQ" target="_blank" rel="noopener noreferrer" aria-label="카카오맵에서 열기"><span class="map-provider-icon" aria-hidden="true">K</span><span>Kakao</span></a></div><a class="location-phone text-link" href="tel:01029937031">전화 문의 <span>→</span></a></div><div class="map-frame"><iframe title="법률사무소 사율 위치 지도" src="https://www.google.com/maps?hl=ko&amp;q=37.500218671165,127.03648646492&amp;z=18&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div></section>
 </main>
 <footer><div class="wrap footer-row"><div><div class="footer-brand"><div class="footer-logo">SAYUL</div><a class="footer-admin" href="admin.html">관리자</a></div><p>법률사무소 사율 · 광고책임변호사 최사라<br>상담 문의 010-2993-7031</p></div><p class="footer-policy"><a href="privacy.html">개인정보 처리방침</a><br><span>본 홈페이지의 내용은 일반적인 정보 제공을 위한 것이며, 구체적인 법률의견이나 사건 결과를 보장하지 않습니다. 사건별 사실관계와 증거에 따라 검토 내용과 결과는 달라질 수 있습니다.</span></p></div></footer>
 <script type="module">
