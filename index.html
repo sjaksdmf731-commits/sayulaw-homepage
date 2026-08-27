@@ -70,6 +70,30 @@ nav a:hover::after{right:0}
   .consult{padding-top:92px;padding-bottom:92px}
 }
 
+
+/* ambient-background-effects-20260827 */
+#about,.case,.notices,.consult{position:relative;overflow:hidden;isolation:isolate}
+#about>.wrap,.case>.wrap,.notices>.wrap,.consult>.wrap{position:relative;z-index:2}
+#about::before,.case::before,.case::after,.notices::before,.notices::after,.consult::before,.consult::after{content:"";position:absolute;pointer-events:none;will-change:transform,opacity}
+#about::before{z-index:0;width:620px;height:620px;right:-190px;top:-210px;border-radius:50%;background:radial-gradient(circle,rgba(198,164,105,.16) 0%,rgba(198,164,105,.055) 36%,transparent 70%);filter:blur(4px);animation:ambientOrbA 18s ease-in-out infinite alternate}
+.case::before{z-index:0;width:720px;height:720px;left:-300px;top:-310px;border-radius:50%;background:radial-gradient(circle,rgba(214,183,125,.18),rgba(214,183,125,.04) 42%,transparent 70%);filter:blur(8px);animation:ambientOrbA 22s ease-in-out infinite alternate}
+.case::after{z-index:0;width:680px;height:680px;right:-300px;bottom:-370px;border-radius:50%;background:radial-gradient(circle,rgba(65,116,132,.18),rgba(65,116,132,.03) 43%,transparent 72%);filter:blur(10px);animation:ambientOrbB 25s ease-in-out infinite alternate}
+.notices::before{z-index:0;inset:-20%;background-image:linear-gradient(rgba(16,18,24,.026) 1px,transparent 1px),linear-gradient(90deg,rgba(16,18,24,.026) 1px,transparent 1px);background-size:72px 72px;transform:rotate(-4deg);animation:ambientGrid 28s linear infinite}
+.notices::after{z-index:0;width:560px;height:560px;left:-250px;bottom:-320px;border-radius:50%;background:radial-gradient(circle,rgba(198,164,105,.12),transparent 69%);animation:ambientOrbB 20s ease-in-out infinite alternate}
+.consult::before{z-index:0;width:760px;height:760px;right:-340px;top:-390px;border-radius:50%;background:radial-gradient(circle,rgba(198,164,105,.16),rgba(198,164,105,.025) 47%,transparent 70%);filter:blur(10px);animation:ambientOrbA 24s ease-in-out infinite alternate}
+.consult::after{z-index:0;width:580px;height:580px;left:-300px;bottom:-340px;border-radius:50%;background:radial-gradient(circle,rgba(54,105,122,.15),transparent 70%);filter:blur(12px);animation:ambientOrbB 27s ease-in-out infinite alternate}
+@keyframes ambientOrbA{0%{transform:translate3d(-2%,-2%,0) scale(.96);opacity:.58}100%{transform:translate3d(8%,7%,0) scale(1.09);opacity:1}}
+@keyframes ambientOrbB{0%{transform:translate3d(5%,-4%,0) scale(1.04);opacity:.5}100%{transform:translate3d(-7%,6%,0) scale(.94);opacity:.92}}
+@keyframes ambientGrid{0%{transform:translate3d(-20px,-20px,0) rotate(-4deg)}100%{transform:translate3d(52px,52px,0) rotate(-4deg)}}
+@media(max-width:800px){
+ #about::before{width:420px;height:420px;right:-250px;top:-130px;opacity:.62}
+ .case::before,.case::after,.consult::before,.consult::after{transform:scale(.78);opacity:.62}
+ .notices::before{background-size:58px 58px;opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){
+ #about::before,.case::before,.case::after,.notices::before,.notices::after,.consult::before,.consult::after{animation:none!important}
+}
+
 </style>
 </head>
 <body>
