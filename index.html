@@ -194,12 +194,14 @@ body.profile-modal-open{overflow:hidden}
 .notice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:1050px){.notice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){.notice-grid{grid-template-columns:1fr}}
-.form{gap:10px}
-.consent{grid-column:span 1;gap:9px;min-height:42px;padding:7px 10px;font-size:10.5px;line-height:1.35}
+.form{gap:8px}
+.form input,.form textarea{padding:12px 2px}
+.form textarea{min-height:130px}
+.consent{grid-column:span 1;gap:8px;min-height:38px;padding:5px 9px;font-size:10.5px;line-height:1.3}
 .consent input{width:14px;height:14px}
-.form .btn{grid-column:span 1;min-height:42px;margin-top:0;padding:0 18px;font-size:12px}
-.status{padding:9px 12px;line-height:1.5}
-@media(max-width:800px){.consent{padding:7px 9px}.form .btn{min-height:42px}.status{padding:8px 10px}}
+.form .btn{grid-column:span 1;min-height:38px;margin-top:0;padding:0 16px;font-size:12px}
+.status{padding:7px 10px;line-height:1.4}
+@media(max-width:800px){.form textarea{min-height:120px}.consent{padding:5px 8px}.form .btn{min-height:38px}.status{padding:7px 9px}}
 </style>
 </head>
 <body>
