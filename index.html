@@ -191,6 +191,9 @@ body.profile-modal-open{overflow:hidden}
 
 </style>
 <style>
+.notice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1050px){.notice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.notice-grid{grid-template-columns:1fr}}
 .form{gap:10px}
 .consent{padding:10px 12px;font-size:11px;line-height:1.45}
 .form .btn{min-height:48px}
