@@ -1,0 +1,35 @@
+name: Update Naver blog feed
+
+on:
+  schedule:
+    - cron: "17 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-naver-blog-feed
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh blog post catalog
+        run: python scripts/update-naver-blog-feed.py
+      - name: Commit updated catalog
+        run: |
+          if git diff --quiet -- data/blog-posts.json; then
+            echo "No feed update needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/blog-posts.json
+          git commit -m "chore: refresh Naver blog feed"
+          git push
