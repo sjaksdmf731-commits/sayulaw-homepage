@@ -11,9 +11,8 @@
 <section id="loginPanel" class="login-wrap hidden"><div class="login-card"><h2>관리자 로그인</h2><p>등록된 관리자 계정으로 로그인해 주세요.</p><label>이메일<input id="email" type="email" placeholder="관리자 이메일"></label><label>비밀번호<input id="password" type="password" placeholder="비밀번호"></label><button id="login">안전하게 로그인</button></div></section>
 <section id="cms" class="hidden">
 <div class="dashboard-head"><div><div class="side-label">CONTENT MANAGEMENT</div><h2>홈페이지 관리</h2></div><span>선택한 항목만 표시됩니다.</span></div>
-<div class="admin-tabs" role="tablist" aria-label="관리 메뉴"><button type="button" class="admin-tab is-active" data-view="case">사건사례 관리</button><button type="button" class="admin-tab" data-view="notice">공지사항 관리</button><button type="button" class="admin-tab" data-view="inquiry">상담신청 관리</button></div>
-<section id="caseView" class="panel admin-view case-view is-active"><div class="panel-head"><h2>사건사례 관리</h2><span class="index">CASE</span></div><label>사건 분야<select id="caseCategory"><option value="" selected disabled>사건 분야를 선택하세요</option><optgroup label="민사"><option>민사 · 계약분쟁</option><option>민사 · 채권회수</option><option>민사 · 손해배상</option><option>민사 · 부동산/임대차</option><option>민사 · 집합건물/관리비</option></optgroup><optgroup label="가사"><option>가사 · 이혼</option><option>가사 · 재산분할/위자료</option><option>가사 · 양육권/양육비</option><option>가사 · 상간 손해배상</option><option>가사 · 상속</option></optgroup><optgroup label="기업·기타"><option>기업 · 계약서/법률자문</option><option>기업 · 상사분쟁</option><option>기타</option></optgroup></select></label><label>제목<input id="caseTitle" placeholder="사건사례 제목"></label><label>사건 개요<textarea id="caseSummary" placeholder="사건의 핵심 내용과 대응 방향"></textarea></label><label>결과<input id="caseResult" placeholder="예: 합의 성립, 청구 기각"></label><label>사건 이미지 · JPG / PNG / BMP (최대 5MB)<input id="caseImage" type="file" accept=".jpg,.jpeg,.png,.bmp,image/jpeg,image/png,image/bmp"></label><label class="check"><input id="casePublished" type="checkbox" checked> 홈페이지에 바로 공개</label><button id="addCase">사건사례 등록</button><div class="embedded-list"><div class="list-title"><h2>등록된 사건사례</h2><span>공개 여부와 이미지를 확인하세요.</span></div><div id="cases"></div></div></section>
-<section id="noticeView" class="panel admin-view notice-view"><div class="panel-head"><h2>공지사항 관리</h2><span class="index">NOTICE</span></div><div id="noticeTemplates" class="notice-templates"><button id="seedGuideNotices" type="button">기본 안내 4건 생성</button><button type="button" data-title="공지사항" data-content="홈페이지 공지사항을 입력해 주세요.">새 공지 작성</button></div><label>제목<input id="noticeTitle" placeholder="공지 제목"></label><label>내용<textarea id="noticeContent" placeholder="공지 내용을 입력하세요"></textarea></label><label class="check"><input id="noticePublished" type="checkbox" checked> 홈페이지에 바로 공개</label><div class="form-actions"><button id="addNotice">공지사항 등록</button><button id="cancelNoticeEdit" class="secondary hidden" type="button">수정 취소</button></div><div class="embedded-list"><div class="list-title"><h2>등록된 공지사항</h2><span>홈페이지 공지 목록</span></div><div id="notices"></div></div></section>
+<div class="admin-tabs" role="tablist" aria-label="관리 메뉴"><button type="button" class="admin-tab is-active" data-view="notice">공지사항 관리</button><button type="button" class="admin-tab" data-view="inquiry">상담신청 관리</button></div>
+<section id="noticeView" class="panel admin-view notice-view is-active"><div class="panel-head"><h2>공지사항 관리</h2><span class="index">NOTICE</span></div><div id="noticeTemplates" class="notice-templates"><button id="seedGuideNotices" type="button">기본 안내 4건 생성</button><button type="button" data-title="공지사항" data-content="홈페이지 공지사항을 입력해 주세요.">새 공지 작성</button></div><label>제목<input id="noticeTitle" placeholder="공지 제목"></label><label>내용<textarea id="noticeContent" placeholder="공지 내용을 입력하세요"></textarea></label><label class="check"><input id="noticePublished" type="checkbox" checked> 홈페이지에 바로 공개</label><div class="form-actions"><button id="addNotice">공지사항 등록</button><button id="cancelNoticeEdit" class="secondary hidden" type="button">수정 취소</button></div><div class="embedded-list"><div class="list-title"><h2>등록된 공지사항</h2><span>홈페이지 공지 목록</span></div><div id="notices"></div></div></section>
 <section id="inquiryList" class="panel admin-view inquiry-view"><div class="list-title"><h2>상담신청 관리</h2><div class="inquiry-tools"><span>문의 목록 및 처리 상태</span><button id="deleteSelectedInquiries" class="danger" type="button" disabled>선택 삭제</button></div></div><div id="inquiries"></div></section>
 </section></div></main></div>
 <script type="module">
@@ -95,27 +94,6 @@ else{
  };
  logout.onclick=async()=>{await sb.auth.signOut();location.reload()};
 
- async function uploadCaseImage(){
-   const file=document.getElementById("caseImage").files[0];
-   if(!file)return null;
-   const allowed=["image/jpeg","image/png","image/bmp"];
-   if(!allowed.includes(file.type)||file.size>5*1024*1024)throw new Error("JPG, PNG, BMP 파일만 5MB 이하로 올릴 수 있습니다.");
-   const extension=file.name.split(".").pop().toLowerCase();
-   const path="cases/"+crypto.randomUUID()+"."+extension;
-   const {error}=await sb.storage.from("case-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type});
-   if(error)throw error;
-   const {data}=sb.storage.from("case-images").getPublicUrl(path);
-   return data.publicUrl;
- }
- document.getElementById("addCase").onclick=async()=>{
-   try{
-     status.className="status";status.textContent="사건사례와 이미지를 저장하는 중…";
-     const image_url=await uploadCaseImage();
-     const {error}=await sb.from("cases").insert({category:caseCategory.value.trim(),title:caseTitle.value.trim(),summary:caseSummary.value.trim(),result:caseResult.value.trim(),image_url,published:casePublished.checked});
-     if(error)throw error;
-     status.className="status ok";status.textContent="사건사례 등록 성공";caseCategory.value=caseTitle.value=caseSummary.value=caseResult.value="";document.getElementById("caseImage").value="";loadCases();
-   }catch(error){status.className="status err";status.textContent="사건사례 등록 실패: "+error.message;}
- };
  document.getElementById("addNotice").onclick=async()=>{
    const payload={title:noticeTitle.value.trim(),content:noticeContent.value.trim(),published:noticePublished.checked};
    if(!payload.title||!payload.content){status.className="status warn";status.textContent="공지 제목과 내용을 입력해 주세요.";return;}
@@ -125,23 +103,11 @@ else{
  };
  document.getElementById("cancelNoticeEdit").onclick=resetNoticeForm;
  document.getElementById("seedGuideNotices").onclick=async()=>{const titles=defaultGuideNotices.map(x=>x.title);const {data,error}=await sb.from("notices").select("title").in("title",titles);if(error){status.className="status err";status.textContent="기본 안내 확인 실패: "+error.message;return;}const existing=new Set((data||[]).map(x=>x.title));const missing=defaultGuideNotices.filter(x=>!existing.has(x.title));if(!missing.length){status.className="status ok";status.textContent="기본 안내 4건이 이미 등록되어 있습니다.";return;}const result=await sb.from("notices").insert(missing);status.className=result.error?"status err":"status ok";status.textContent=result.error?"기본 안내 등록 실패: "+result.error.message:`기본 안내 ${missing.length}건을 등록했습니다.`;if(!result.error)loadNotices()};
- async function loadAll(){loadCases();loadNotices();loadInquiries();}
- async function loadDashboardStats(){
-   const [inquiryResult,caseResult,noticeResult]=await Promise.all([
-     sb.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),
-     sb.from("cases").select("id",{count:"exact",head:true}).eq("published",true),
-     sb.from("notices").select("id",{count:"exact",head:true}).eq("published",true)
-   ]);
-   document.getElementById("statNewInquiries").textContent=inquiryResult.error?"—":(inquiryResult.count??0);
-   document.getElementById("statPublishedCases").textContent=caseResult.error?"—":(caseResult.count??0);
-   document.getElementById("statPublishedNotices").textContent=noticeResult.error?"—":(noticeResult.count??0);
- }
- async function loadCases(){const {data,error}=await sb.from("cases").select("*").order("created_at",{ascending:false});cases.innerHTML=error?error.message:(data?.length?`<table><tr><th>분야</th><th>제목</th><th>이미지</th><th>공개</th><th>작업</th></tr>${data.map(x=>`<tr><td>${h(x.category)}</td><td>${h(x.title)}</td><td>${x.image_url?'<img src="'+h(x.image_url)+'" alt="" style="width:72px;height:48px;object-fit:cover">':"없음"}</td><td>${x.published?"공개":"비공개"}</td><td><button class="danger" onclick="deleteCase('${x.id}')">삭제</button></td></tr>`).join("")}</table>`:"등록된 사건사례 없음");}
+ async function loadAll(){loadNotices();loadInquiries();}
  async function loadNotices(){const {data,error}=await sb.from("notices").select("*").order("created_at",{ascending:false});noticeRows=data||[];notices.innerHTML=error?error.message:(data?.length?`<table><tr><th>제목</th><th>공개</th><th>작업</th></tr>${data.map(x=>`<tr><td>${h(x.title)}</td><td>${x.published?"공개":"비공개"}</td><td><button class="edit" onclick="editNotice('${x.id}')">수정</button> <button class="danger" onclick="deleteNotice('${x.id}')">삭제</button></td></tr>`).join("")}</table>`:"등록된 공지 없음");}
  async function loadInquiries(){const {data,error}=await sb.from("inquiries").select("*").order("created_at",{ascending:false});inquiries.innerHTML=error?error.message:(data?.length?`<div class="inquiry-grid">${data.map(x=>`<article class="inquiry-card"><div class="inquiry-card-head"><label class="inquiry-select"><input type="checkbox" value="${x.id}" onchange="updateInquirySelection()">선택</label><div class="inquiry-person"><strong>${h(x.name)}</strong><span class="phone">${h(x.phone)}</span><span class="inquiry-date">접수 · ${formatKoreanDate(x.created_at)}</span></div><select aria-label="상담 상태" onchange="setStatus('${x.id}',this.value)"><option ${x.status==="new"?"selected":""} value="new">신규 접수</option><option ${x.status==="contacted"?"selected":""} value="contacted">연락 완료</option><option ${x.status==="done"?"selected":""} value="done">처리 완료</option></select></div><div class="inquiry-message"><span>상담 내용</span><p>${h(x.message)}</p></div></article>`).join("")}</div>`:'<div class="empty">아직 접수된 상담신청이 없습니다.</div>');}
  window.updateInquirySelection=()=>{const selected=document.querySelectorAll('#inquiries input[type="checkbox"]:checked').length;const button=document.getElementById("deleteSelectedInquiries");button.disabled=selected===0;button.textContent=selected?`선택 삭제 (${selected})`:"선택 삭제";};
  document.getElementById("deleteSelectedInquiries").onclick=async()=>{const ids=[...document.querySelectorAll('#inquiries input[type="checkbox"]:checked')].map(input=>input.value);if(!ids.length)return;if(!confirm(`선택한 상담신청 ${ids.length}건을 삭제할까요? 이 작업은 되돌릴 수 없습니다.`))return;const {error}=await sb.from("inquiries").delete().in("id",ids);if(error){status.className="status err";status.textContent="상담신청 삭제 실패: "+error.message;return;}status.className="status ok";status.textContent="선택한 상담신청을 삭제했습니다.";loadInquiries();};
- window.deleteCase=async id=>{const {error}=await sb.from("cases").delete().eq("id",id);if(error)status.textContent=error.message;else loadCases()};
  window.editNotice=id=>{const item=noticeRows.find(x=>String(x.id)===String(id));if(!item)return;editingNoticeId=item.id;noticeTitle.value=item.title||"";noticeContent.value=item.content||"";noticePublished.checked=!!item.published;addNotice.textContent="공지사항 수정 저장";cancelNoticeEdit.classList.remove("hidden");noticeTitle.focus();scrollTo({top:noticeView.offsetTop-20,behavior:"smooth"})};
  window.deleteNotice=async id=>{const {error}=await sb.from("notices").delete().eq("id",id);if(error)status.textContent=error.message;else{if(String(editingNoticeId)===String(id))resetNoticeForm();loadNotices()}};
  window.setStatus=async(id,v)=>{const {error}=await sb.from("inquiries").update({status:v}).eq("id",id);if(error)status.textContent=error.message};
